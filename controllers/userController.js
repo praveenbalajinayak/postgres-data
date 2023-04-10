@@ -2,6 +2,11 @@
 const { where } = require('sequelize');
 var db = require('../models')
 var User = db.user;
+
+const axios = require('axios');
+
+
+
 var addUser = async(req,res) =>{
     const jane = await User.create({ firstName: "Raj" ,  lastName: "Mahesh" });
     //const jane = User.build({ firstName: "Jane" ,  lastName: "hello"});
@@ -49,6 +54,36 @@ var deleteUsers = async(req,res) => {
 
 }
 
+
+var gettest = async(req,res) => {
+
+let payload = JSON.stringify({
+  "firstName": "ki",
+  "lastName": "hjkk"
+});
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: 'http://localhost:9098/users',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : payload
+};
+
+axios.request(config)
+.then((response) => {
+  console.log( "response from service: 9098", JSON.stringify(response.data));
+  res.status(200).json({data:response.data})
+
+})
+.catch((error) => {
+  console.log('error ',error);
+});
+
+}
+
 module.exports={
-    addUser, getUsers , getUser , postUsers , deleteUsers
+    addUser, getUsers , getUser , postUsers , deleteUsers, gettest
 }
