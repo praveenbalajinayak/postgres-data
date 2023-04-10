@@ -2,7 +2,7 @@
 const express = require('express');
 //const app = express()
 
-const { addUser, getUsers , getUser , postUsers , deleteUsers} = require('../controllers/userController');
+const { addUser, getUsers , getUser , postUsers , deleteUsers, gettest} = require('../controllers/userController');
 
 
 
@@ -20,5 +20,7 @@ router.get('/users/:id',getUser);
 router.post('/users',postUsers);
 
 router.delete('/users/:id',deleteUsers);
+
+router.get('/test', gettest)
 
 module.exports = router;
